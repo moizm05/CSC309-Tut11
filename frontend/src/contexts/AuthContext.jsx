@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
                 
                 if (profileResponse.ok) {
                     const userData = await profileResponse.json();
-                    setUser(userData);
+                    setUser(userData.user);
                 }
                 
                 navigate("/profile");
