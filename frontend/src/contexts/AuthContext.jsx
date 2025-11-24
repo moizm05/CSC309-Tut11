@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             }).then(async (response) => {
                 if (response.ok) {
                     const data = await response.json();
-                    setUser(data);
+                    setUser(data.user);
                 } else {
                     setUser(null);
                 }
@@ -126,7 +126,7 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify(userData),
             });
             if (response.ok) {
-                navigate("/");
+                navigate("/success");
                 return null;
             } else {
                 const errorData = await response.json();
