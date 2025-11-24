@@ -81,6 +81,21 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem("token", data.token);
+                
+                const profileResponse = await fetch(`${VITE_BACKEND_URL}/user/me`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${data.token}`
+                    },
+                    credentials: "include",
+                });
+                
+                if (profileResponse.ok) {
+                    const userData = await profileResponse.json();
+                    setUser(userData);
+                }
+                
                 navigate("/profile");
                 return null;
             } else {
